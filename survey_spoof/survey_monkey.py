@@ -1,6 +1,4 @@
-import requests
-import json
-from random import randrange
+import requests, json, random
 from argparse import ArgumentParser
 
 def parse_args():
@@ -13,6 +11,9 @@ def parse_args():
 
 
 def main():
+	# User is a name who'd you would like to vote for
+	# R_Url is the link to send on survey monkey
+	# Token is taken from the website ( This can be obtained by inspecting the button element)
 
 	args = parse_args()
 	user = args.user
@@ -34,10 +35,10 @@ def main():
 		exit(1)
 	else: 
 		for i in comp_data:
-			rand_choice = list(choices_survey.values())[randrange(5)]
+			rand_choice = random.choice(list(choices_survey.values()))
 			print('submitted', {
 				'354222340': user, 
-				'354222338': rand_choice, 
+				'354222338': [index for index, value in choices_survey.items() if value == rand_choice][0], 
 				'354222339': i
 			})
 			requests.post(r_url, data={'354222340': user, 
