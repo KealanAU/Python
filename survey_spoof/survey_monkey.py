@@ -41,11 +41,12 @@ def main():
 				'354222338': [index for index, value in choices_survey.items() if value == rand_choice][0], 
 				'354222339': i
 			})
-			requests.post(r_url, data={'354222340': user, 
-										'354222338': rand_choice, 
-										'354222339': i,
-										"survey_data": survey_data_token},
-										cookies=r.cookies)
+			requests.post(r_url, data={
+				'354222340': user, 
+				'354222338': rand_choice, 
+				'354222339': i,
+				"survey_data": survey_data_token},
+cookies=r.cookies)
 	exit(0)
 
 if __name__ == "__main__" :
