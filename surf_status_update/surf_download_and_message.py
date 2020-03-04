@@ -2,6 +2,7 @@ import requests, re, json, time
 from bs4 import BeautifulSoup
 from twilio.rest import Client 
 
+phone_number = ""
 user_id = ""
 auth_token = ""
 client = Client(user_id, auth_token) 
@@ -41,11 +42,6 @@ def main():
 		forecast_tide_joined = "{" + forecast + "," + tide +"}"
 
 	forecast_tide_joined = json.loads(forecast_tide_joined)
-
-	with open("forecast.json", "w") as file:
-		file.write(forecast)
-
-	print(time.strftime('%Y-%m-%d', now))
 	 
 
 	for index, value in enumerate(forecast_tide_joined["forecast"]):
@@ -71,10 +67,10 @@ def main():
 				message = client.messages.create( 
 								from_='whatsapp:+14155238886',  
 								body=f"{result}",      
-								to='whatsapp:+61402201922' 
+								to=f'whatsapp:{phone_number}' 
 							) 
 
-	print(message.sid)	
+	print("Successfully submitted", message.sid)	
 
 	 
 
